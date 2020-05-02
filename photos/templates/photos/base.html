@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+{% load static %}
+{% load photo_tags %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Foto-Salon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=PT+Sans+Narrow&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'photos/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'photos/css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'photos/libs/slick-1.8.1/slick/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'photos/libs/slick-1.8.1/slick/slick-theme.css' %}">
+
+    <script src="{% static 'photos/libs/fontawesome/js/all.min.js'%}"></script>
+    <script src="{% static 'photos/libs/jQuery/bower_components/jquery/dist/jquery.min.js' %}"> </script>
+    <script src="{% static 'photos/libs/slick-1.8.1/slick/slick.js'%} "></script>
+</head>
+
+<body>
+    <div class="header_mob_menu">
+        <div class="header_burger">
+            <span class="burger"></span>
+        </div>
+    </div>
+    <header class="header">
+        <div class="header_wrap"></div>
+        <div class="container header_container">
+            <a href="#" class="logo"><img src="{%static 'photos/img/camera_logo.png'%}" alt="LOGO" class="logo_img"></a>
+            <div class="header_address">
+                <p class="header_title header_title_address">Адрес:</p>
+                <p class="header_text adress_text">
+                    г. Кокшетау Абая 158А
+                </p>
+            </div>
+            <div class="header_contacts contacts">
+                <p class="header_title header_title_contacts">Контакты:</p>
+                <p class="header_text contacts_text">
+                    <span class="phone_first">8(747)-158-95-95 </span><br>
+                    <span class="phone_first">8(747)-157-95-95 </span><br>
+                    <span class="phone_first">foto-salon@mail.ru</span>
+                </p>
+            </div>
+        </div>
+    </header>
+    <nav class="toggle_menu">
+        <ul class="tg_menu">
+            <li class="tg_menu_item"><a href="#">Фотоуслуги</a></li>
+            <li class="tg_menu_item"><a href="#">ФОТОСУВЕНИРЫ</a></li>
+            <li class="tg_menu_item"><a href="#">ОЦИФРОВКА СЛАЙДОВ И ВИДЕОКАССЕТ</a></li>
+            <li class="tg_menu_item"><a href="#">КОПИЦЕНТР</a></li>
+            <li class="tg_menu_item"><a href="#">ПОЛИГРАФИЯ</a></li>
+            <li class="tg_menu_item"><a href="#">ПЕЧАТЬ</a></li>
+        </ul>
+    </nav>
+    <nav class="main_menu">
+        <div class="container menu_container">
+            <!--
+            <input type="checkbox" name="menu" id="menu_toggle" class="toggleMenuInput">
+            <label for="menu_toggle" class="toggleMenu"><i class="fas fa-bars"></i>Menu</label>-->
+            <ul class="menu">
+
+                {% for service in services %}
+                <li class="menu_item">
+                    <div class="menu_item_wrap"><a href="#" class="menu_item_link">{{service.name}}</a></div>
+                    <div class="sub_menu_area">
+                        <a href="#">
+                            <p class="sub_menu_title">{{service.name.upper}}</p>
+                        </a>
+                        <ul class="sub_menu">
+                            {% for s in subservices|cut:service %}
+
+                            <li class="sub_menu_item">
+                                <a href="{% url 'subservices' pk=s.pk %}">
+                                    <img src="{{s.image.url}}" alt="PHOTO" class="sub_menu_img">
+                                    <p class="menu_item_title">{{s.name}}</p>
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endfor %}
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+    {% block main %}
+    {% endblock %}
+    <footer class="footer">
+        <div class="container footer_container">
+            <div class="footer_menu">
+                <ul class="footer_side footer_left_first menu_side_mob">
+                    <h4 class="footer_side_title footer_left_title">Фотография</h4>
+                    <li class="footer_side_item footer_left_item"><a href="#">Художественная</a></li>
+                    <li class="footer_side_item footer_left_item"><a href="#">Портретная</a></li>
+                    <li class="footer_side_item footer_left_item"><a href="#">Детская</a></li>
+                    <li class="footer_side_item footer_left_item"><a href="#">Семейная</a></li>
+                    <li class="footer_side_item footer_left_item"><a href="#">Предметная</a></li>
+                    <li class="footer_side_item footer_left_item"><a href="#">Событийная</a></li>
+                </ul>
+                <ul class="footer_side footer_left_second menu_side_mob">
+                    <h4 class="footer_side_title footer_left_title">Фотосьемка</h4>
+                    <li class="footer_side_item footer_left_item"><a href="#">Свадьба</a></li>
+                    <li class="footer_side_item footer_left_item"><a href="#">Юбилей</a></li>
+                    <li class="footer_side_item footer_left_item"><a href="#">Крещение</a></li>
+                    <li class="footer_side_item footer_left_item"><a href="#">Выпускной</a></li>
+                    <li class="footer_side_item footer_left_item"><a href="#">Корпаратив</a></li>
+                    <li class="footer_side_item footer_left_item"><a href="#">Предметы</a></li>
+                    <li class="footer_side_item footer_left_item"><a href="#">Интерьер</a></li>
+                </ul>
+                <ul class="footer_side footer_left_third menu_side_mob">
+                    <h4 class="footer_side_title footer_left_title">Документы</h4>
+                    <li class="footer_side_item footer_left_item"><a href="#">3 х 4</a></li>
+                    <li class="footer_side_item footer_left_item"><a href="#">3.5 х 4.5</a></li>
+                    <li class="footer_side_item footer_left_item"><a href="#">4 х 5</a></li>
+                    <li class="footer_side_item footer_left_item"><a href="#">4 x 6</a></li>
+                    <li class="footer_side_item footer_left_item"><a href="#">4.5 х 6</a></li>
+                    <li class="footer_side_item footer_left_item"><a href="#">9 х 12</a></li>
+                </ul>
+            </div>
+            <p class="footer_text clearfix">© 2017 Brand All Rights Reserved.</p>
+            <div class="soc_net clearfix">
+                <a href="#">
+                    <div class="soc_net_item soc_net_item1"><i class="fab fa-facebook-f sn_img"></i></div>
+                </a>
+                <a href="#">
+                    <div class="soc_net_item soc_net_item2"><i class="fab fa-vk sn_img"></i></div>
+                </a>
+                <a href="#">
+                    <div class="soc_net_item soc_net_item3"><i class="fab fa-instagram sn_img"></i></div>
+                </a>
+                <a href="#">
+                    <div class="soc_net_item soc_net_item4"><i class="fab fa-google-plus-g sn_img"></i></div>
+                </a>
+                <a href="#">
+                    <div class="soc_net_item soc_net_item5"><i class="fab fa-youtube sn_img"></i></div>
+                </a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        $(".slider").slick({
+            dots: true,
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 3
+        });
+
+        $('.header_burger').on("click", function() {
+            $(' body , .toggle_menu , .header_burger').toggleClass('active');
+            $('body').css('position', 'relative');
+        })
+
+    </script>
+</body>
+
+</html>

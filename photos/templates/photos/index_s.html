@@ -1,0 +1,59 @@
+{% extends 'photos/base.html' %}
+{% load static %}
+{% block main %}
+<style>
+    .subservice_back{
+        width:40%;
+        margin:0 auto;
+        border-top: 30px solid #5e8fcb;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+    }
+    .subservice_title{
+        text-align:center;
+        color:white;
+        background-color:;
+        width:70%;
+        margin:0 auto;
+        margin-top:-27px;
+    }
+    .content_new{
+        display:flex;
+        justify-content:center;
+        flex-wrap:wrap;
+    }
+    .example_photos{
+        border-radius:5px;
+        border:2px solid gray;
+        padding:5px;
+        color:blue;
+        margin:20px;
+        text-align:center;
+        width:300px;
+        transition:padding .5s;
+    }
+    .example_photos img{
+        width:200px;
+    }
+    .content_new h2{
+        font-size:40px;
+        color:gray;
+        text-align:center;
+    }
+</style>
+
+<div class="subservice_back"></div>
+<h3 class = 'subservice_title'>{{red.name}}</h3>
+    <div class = 'content_new'>
+
+        {% for ex in example %}
+            <div class = 'example_photos'>
+                        <img src="{{ex.image.url}}">
+                        <p style='color:gray'>{{ex.name}}</p>
+                        <p>{{ex.description}}</p>
+            </div>
+        {% empty %}
+        <h2>Извините<br>данный раздел еще не дополнен</h2>
+        {% endfor %}
+    </div>
+{% endblock %}
